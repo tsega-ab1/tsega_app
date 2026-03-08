@@ -1,0 +1,5 @@
+# Allow gradle wrapper to be tracked by git
+!gradlew
+!gradlew.bat
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
