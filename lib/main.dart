@@ -1597,8 +1597,7 @@ class _LineChartPainter extends CustomPainter {
     final threshY = size.height - (11.0 - minVal) / range * size.height;
     canvas.drawLine(Offset(0, threshY), Offset(size.width, threshY),
       Paint()..color = TColors.red400.withOpacity(0.5)..strokeWidth = 1.5
-        ..style = PaintingStyle.stroke
-        ..pathEffect = null);
+        ..style = PaintingStyle.stroke);
 
     // Dots
     for (final p in pts) {
