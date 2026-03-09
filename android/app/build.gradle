@@ -17,6 +17,10 @@ android {
         jvmTarget = '1.8'
     }
 
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
     defaultConfig {
         applicationId "com.tsega.app"
         minSdk 21
@@ -32,6 +36,7 @@ android {
             shrinkResources false
         }
         release {
+            debuggable false
             signingConfig signingConfigs.debug
             minifyEnabled false
             shrinkResources false
