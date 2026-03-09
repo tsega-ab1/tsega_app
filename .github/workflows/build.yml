@@ -25,12 +25,15 @@ jobs:
       - name: Get packages
         run: flutter pub get
 
-      - name: Build APK split per ABI
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
+
+      - name: Build APK
         run: flutter build apk --debug --split-per-abi
         env:
           GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=1 -Xmx2g"
 
-      - name: Upload arm64 APK
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: tsega-arm64
