@@ -16,66 +16,23 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      # CHUNK 1 — Cache Gradle wrapper first separately
-      - name: Cache Gradle wrapper
-        uses: actions/cache@v4
-        with:
-          path: ~/.gradle/wrapper
-          key: gradle-wrapper-${{ hashFiles('**/gradle-wrapper.properties') }}
-
-      # CHUNK 2 — Cache Gradle dependencies separately
-      - name: Cache Gradle deps
-        uses: actions/cache@v4
-        with:
-          path: ~/.gradle/caches
-          key: gradle-caches-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            gradle-caches-
-
-      # CHUNK 3 — Cache Flutter separately
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.22.3'
           channel: 'stable'
           cache: true
 
-      # CHUNK 4 — Cache pub packages separately
-      - name: Cache pub packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.pub-cache
-          key: pub-${{ hashFiles('**/pubspec.yaml') }}
-          restore-keys: |
-            pub-
-
-      # CHUNK 5 — Get packages
       - name: Get packages
         run: flutter pub get
 
-      # CHUNK 6 — Pre-warm Gradle only (no compile)
-      - name: Pre-warm Gradle
-        run: |
-          cd android
-          ./gradlew dependencies --no-daemon --max-workers=2 \
-            -Dorg.gradle.jvmargs="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError" \
-            || true
-
-      # CHUNK 7 — Actual APK build with tight memory limits
-      - name: Build APK
-        run: |
-          flutter build apk --debug \
-            --no-tree-shake-icons
+      - name: Build APK split per ABI
+        run: flutter build apk --debug --split-per-abi
         env:
-          GRADLE_OPTS: >-
-            -Dorg.gradle.daemon=false
-            -Dorg.gradle.workers.max=2
-            -Dorg.gradle.jvmargs=-Xmx2500m
-            -Dkotlin.incremental=false
+          GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=1 -Xmx2g"
 
-      # CHUNK 8 — Upload
-      - name: Upload APK
+      - name: Upload arm64 APK
         uses: actions/upload-artifact@v4
         with:
-          name: tsega-debug-apk
-          path: build/app/outputs/flutter-apk/app-debug.apk
+          name: tsega-arm64
+          path: build/app/outputs/flutter-apk/app-arm64-v8a-debug.apk
           retention-days: 7
