@@ -39,6 +39,13 @@ jobs:
             -keypass android \
             -dname "CN=Android Debug,O=Android,C=US"
 
+      - name: Download gradle wrapper jar
+        run: |
+          mkdir -p android/gradle/wrapper
+          curl -L \
+            https://github.com/gradle/gradle/raw/v8.1.1/gradle/wrapper/gradle-wrapper.jar \
+            -o android/gradle/wrapper/gradle-wrapper.jar
+
       - name: Build with Gradle directly
         run: |
           cd android
