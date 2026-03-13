@@ -61,4 +61,23 @@ class LanguageProvider extends ChangeNotifier {
   String get nearestHospital => s(StringsEn.nearestHospital, StringsAm.nearestHospital);
   String get dangerSigns => s(StringsEn.dangerSigns, StringsAm.dangerSigns);
   String get firstAid => s(StringsEn.firstAid, StringsAm.firstAid);
+
+  String get medicalRecords => s(StringsEn.medicalRecords, StringsAm.medicalRecords);
+  String get addResult => s(StringsEn.addResult, StringsAm.addResult);
+  String get scanQr => s(StringsEn.scanQr, StringsAm.scanQr);
+  String get manualEntry => s(StringsEn.manualEntry, StringsAm.manualEntry);
+  String get hemoglobin => s(StringsEn.hemoglobin, StringsAm.hemoglobin);
+  String get bloodPressure => s(StringsEn.bloodPressure, StringsAm.bloodPressure);
+  String get bloodSugar => s(StringsEn.bloodSugar, StringsAm.bloodSugar);
+  String get weight => s(StringsEn.weight, StringsAm.weight);
+  String get aiRiskAssessment => s(StringsEn.aiRiskAssessment, StringsAm.aiRiskAssessment);
+  String get labResults => s(StringsEn.labResults, StringsAm.labResults);
+  String get notifications => s(StringsEn.notifications, StringsAm.notifications);
+  String get aboutTsega => s(StringsEn.aboutTsega, StringsAm.aboutTsega);
+  String get support => s(StringsEn.support, StringsAm.support);
+  String get reminders => s(StringsEn.reminders, StringsAm.reminders);
+  String get kickCounter => s(StringsEn.kickCounter, StringsAm.kickCounter);
+  String get weekByWeek => s(StringsEn.weekByWeek, StringsAm.weekByWeek);
+  String get logSymptoms => s(StringsEn.logSymptoms, StringsAm.logSymptoms);
+  String get logToday => s(StringsEn.logToday, StringsAm.logToday);
 }

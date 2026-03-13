@@ -64,7 +64,7 @@ class _AiChatOverlayState extends State<AiChatOverlay> {
     });
     Future.delayed(const Duration(milliseconds: 100), () {
       if (_scroll.hasClients) {
-        _scroll.animateTo(_scroll.maxScrollExtent,
+        _scroll.animateTo(_scroll.position.maxScrollExtent,
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeOut);
       }

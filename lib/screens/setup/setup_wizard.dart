@@ -88,7 +88,6 @@ class _SetupWizardState extends State<SetupWizard> {
                   Text('${lang.s('Step', 'ደረጃ')} ${_step + 1} / $_totalSteps',
                       style: TTextStyles.labelMedium),
                   TextButton(
-                    onTap: _next,
                     onPressed: _next,
                     child: Text(lang.skip,
                         style: const TextStyle(color: TColors.gray)),
