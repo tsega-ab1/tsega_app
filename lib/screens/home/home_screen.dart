@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../core/theme/colors.dart';
 import '../../core/theme/gradients.dart';
 import '../../core/theme/text_styles.dart';
+import '../../screens/wellness/wellness_screen.dart';
 import '../../core/providers/language_provider.dart';
 import '../../core/providers/user_provider.dart';
 import '../../core/providers/stage_provider.dart';
@@ -210,6 +211,24 @@ class _PeriodHome extends StatelessWidget {
     );
   }
 }
+GestureDetector(
+  onTap: () => Navigator.push(
+    context,
+    PageRouteBuilder(
+      pageBuilder: (_, __, ___) => const WellnessScreen(),
+      transitionsBuilder: (_, anim, __, child) => SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(1.0, 0.0),
+          end: Offset.zero,
+        ).animate(CurvedAnimation(
+            parent: anim, curve: Curves.easeOutCubic)),
+        child: child,
+      ),
+      transitionDuration: const Duration(milliseconds: 400),
+    ),
+  ),
+  child: Container(/* your button */),
+)
 
 // ─── PREGNANCY HOME ──────────────────────────────────────────────
 class _PregnancyHome extends StatelessWidget {
