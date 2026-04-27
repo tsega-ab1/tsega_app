@@ -52,7 +52,6 @@ class _ModuleScreenState extends State<ModuleScreen> {
         CustomScrollView(
           controller: _scrollCtrl,
           slivers: [
-            // Module hero app bar
             SliverAppBar(
               expandedHeight: 200,
               pinned: true,
@@ -93,8 +92,6 @@ class _ModuleScreenState extends State<ModuleScreen> {
                 ),
               ),
             ),
-
-            // Read progress
             SliverToBoxAdapter(
               child: LinearProgressIndicator(
                 value: _readProgress,
@@ -103,15 +100,12 @@ class _ModuleScreenState extends State<ModuleScreen> {
                 minHeight: 3,
               ),
             ),
-
-            // Module content
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Duration badge
                     Row(children: [
                       const Icon(Icons.timer_outlined,
                           color: TColors.gray, size: 16),
@@ -141,23 +135,19 @@ class _ModuleScreenState extends State<ModuleScreen> {
                         ),
                     ]),
                     const SizedBox(height: 24),
-
-                    // Content
                     Text(
                       lang.isAmharic
                           ? widget.module.contentAm
                           : widget.module.contentEn,
                       style: TTextStyles.bodyLarge.copyWith(height: 1.8),
                     ),
-                    const SizedBox(height: 100), // space for button
+                    const SizedBox(height: 100),
                   ],
                 ),
               ),
             ),
           ],
         ),
-
-        // Take quiz button
         if (_readComplete)
           Positioned(
             bottom: 24, left: 24, right: 24,
