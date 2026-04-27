@@ -9,6 +9,7 @@ import '../../models/lab_row.dart';
 import '../../widgets/common/tsega_app_bar.dart';
 import '../../overlays/lab_entry_overlay.dart';
 import '../../overlays/ai_risk_overlay.dart';
+import '../wearables/wearables_screen.dart';
 
 class HealthScreen extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -59,6 +60,13 @@ class _HealthScreenState extends State<HealthScreen>
                 Text(lang.medicalRecords, style: TTextStyles.headlineLarge),
                 const SizedBox(height: 16),
                 _RiskSummaryCard(latest: _results.first),
+                const SizedBox(height: 16),
+                    const SizedBox(height: 16),
+                GestureDetector(
+  onTap: () => Navigator.push(context,
+    MaterialPageRoute(builder: (_) => const WearablesScreen())),
+  child: // your wearables card
+)
                 const SizedBox(height: 16),
                 if (stage.isPregnancyMode) ...[
                   _AncCard(),
