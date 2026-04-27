@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../rewards/rewards_screen.dart';
+import '../partner_invite/partner_invite_screen.dart';
 import '../../core/theme/colors.dart';
 import '../../core/theme/gradients.dart';
 import '../../core/theme/text_styles.dart';
@@ -325,12 +326,22 @@ class ProfileScreen extends StatelessWidget {
                   _SectionLabel(lang.s('Emergency Contacts', 'የአደጋ ዕውቂያዎች')),
                   _InfoCard(
                     children: [
-                      _InfoRow(
-                        Icons.favorite_rounded,
-                        lang.s('Partner', 'ሸሪካ'),
-                        user.user?.partnerPhone ??
-                            lang.s('Not set', 'አልተቀናጀም'),
-                        iconColor: TColors.pink500,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const PartnerInviteScreen(),
+                            ),
+                          );
+                        },
+                        child: _InfoRow(
+                          Icons.favorite_rounded,
+                          lang.s('Partner', 'ሸሪካ'),
+                          user.user?.partnerPhone ??
+                              lang.s('Not set', 'አልተቀናጀም'),
+                          iconColor: TColors.pink500,
+                        ),
                       ),
                       _InfoRow(
                         Icons.emergency_rounded,
