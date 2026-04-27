@@ -62,11 +62,49 @@ class _HealthScreenState extends State<HealthScreen>
                 _RiskSummaryCard(latest: _results.first),
                 const SizedBox(height: 16),
                     
+                // ─── WEARABLES CARD ──────────────────────────────────
                 GestureDetector(
-  onTap: () => Navigator.push(context,
-    MaterialPageRoute(builder: (_) => const WearablesScreen())),
-  child:
-)
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const WearablesScreen())),
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: TColors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [BoxShadow(
+                        color: TColors.teal700.withOpacity(0.06),
+                        blurRadius: 12, offset: const Offset(0, 3))],
+                    ),
+                    child: Row(children: [
+                      Container(
+                        width: 48, height: 48,
+                        decoration: BoxDecoration(
+                          color: TColors.blue50,
+                          borderRadius: BorderRadius.circular(12)),
+                        child: const Icon(Icons.watch_rounded,
+                            color: TColors.blue500, size: 24),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(lang.s('Wearables', 'ተለባሽ መሳሪያዎች'),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14, color: TColors.dark)),
+                          const SizedBox(height: 4),
+                          Text(lang.s('Connect your health devices',
+                              'የጤና መሳሪያዎን ያገናኙ'),
+                              style: const TextStyle(
+                                  fontSize: 12, color: TColors.gray)),
+                        ],
+                      )),
+                      const Icon(Icons.arrow_forward_ios_rounded,
+                          color: TColors.gray, size: 14),
+                    ]),
+                  ),
+                ),
+
                 const SizedBox(height: 16),
                 if (stage.isPregnancyMode) ...[
                   _AncCard(),
