@@ -17,6 +17,8 @@ import '../../overlays/tip_detail_overlay.dart';
 import '../../screens/education/education_screen.dart';
 import '../../screens/health/health_screen.dart';
 import '../../screens/profile/profile_screen.dart';
+import '../../screens/cycle/cycle_screen.dart';
+import '../../screens/pregnancy/pregnancy_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -211,24 +213,6 @@ class _PeriodHome extends StatelessWidget {
     );
   }
 }
-GestureDetector(
-  onTap: () => Navigator.push(
-    context,
-    PageRouteBuilder(
-      pageBuilder: (_, __, ___) => const WellnessScreen(),
-      transitionsBuilder: (_, anim, __, child) => SlideTransition(
-        position: Tween<Offset>(
-          begin: const Offset(1.0, 0.0),
-          end: Offset.zero,
-        ).animate(CurvedAnimation(
-            parent: anim, curve: Curves.easeOutCubic)),
-        child: child,
-      ),
-      transitionDuration: const Duration(milliseconds: 400),
-    ),
-  ),
-  child: Container(/* your button */),
-)
 
 // ─── PREGNANCY HOME ──────────────────────────────────────────────
 class _PregnancyHome extends StatelessWidget {
@@ -446,7 +430,7 @@ class _PregnancyHeroCard extends StatelessWidget {
   }
 }
 
-// ─── QUICK ACTIONS ───────────────────────────────────────────────
+// ─── QUICK ACTIONS (Period) ──────────────────────────────────────
 class _QuickActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -455,9 +439,17 @@ class _QuickActions extends StatelessWidget {
       (Icons.edit_note_rounded, lang.logToday, TColors.pink500,
        () => _showLog(context)),
       (Icons.calendar_month_rounded, lang.s('Calendar', 'ቀን'),
-       TColors.teal500, () {}),
+       TColors.teal500, () {
+         Navigator.push(context,
+             MaterialPageRoute(builder: (_) => const CycleScreen()));
+       }),
       (Icons.psychology_rounded, lang.s('AI', 'AI'),
        TColors.blue500, () => _showAi(context)),
+      (Icons.spa_rounded, lang.s('Wellness', 'ጤናማነት'),
+       TColors.green600, () {
+         Navigator.push(context,
+             MaterialPageRoute(builder: (_) => const WellnessScreen()));
+       }),
     ];
     return Row(
       children: List.generate(items.length, (i) => Expanded(
@@ -510,9 +502,20 @@ class _PregnancyQuickActions extends StatelessWidget {
   Widget build(BuildContext context) {
     final lang = context.watch<LanguageProvider>();
     final items = [
-      (Icons.touch_app_rounded, lang.kickCounter, TColors.teal500, () {}),
-      (Icons.calendar_view_week_rounded, lang.weekByWeek, TColors.blue500, () {}),
-      (Icons.note_add_rounded, lang.logSymptoms, TColors.pink500, () {}),
+      (Icons.touch_app_rounded, lang.kickCounter, TColors.teal500,
+       () {}),
+      (Icons.calendar_view_week_rounded, lang.weekByWeek, TColors.blue500,
+       () {
+         Navigator.push(context,
+             MaterialPageRoute(builder: (_) => const PregnancyScreen()));
+       }),
+      (Icons.note_add_rounded, lang.logSymptoms, TColors.pink500,
+       () {}),
+      (Icons.spa_rounded, lang.s('Wellness', 'ጤናማነት'),
+       TColors.green600, () {
+         Navigator.push(context,
+             MaterialPageRoute(builder: (_) => const WellnessScreen()));
+       }),
     ];
     return Row(
       children: List.generate(items.length, (i) => Expanded(
