@@ -6,6 +6,8 @@ import '../../core/theme/text_styles.dart';
 import '../../core/providers/language_provider.dart';
 import '../../core/providers/stage_provider.dart';
 import '../../widgets/common/tsega_app_bar.dart';
+import '../../models/models.dart'; // EducationModule
+import 'module_screen.dart';
 
 class EducationScreen extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -20,14 +22,118 @@ class _EducationScreenState extends State<EducationScreen> {
   String _filter = 'All';
 
   final _modules = [
-    _Mod('cycle_basics', 'Understanding Your Cycle', 'ዑደቱን መረዳት', 'Reproductive', 'የማዋለድ', '8 min', true, false, TGradients.gradPink),
-    _Mod('danger_signs', 'Danger Signs in Pregnancy', 'በእርግዝና አደጋ ምልክቶች', 'Pregnancy', 'እርግዝና', '12 min', true, false, TGradients.gradTeal),
-    _Mod('iron_nutrition', 'Iron & Nutrition Guide', 'ብረት እና አመጋገብ መመሪያ', 'Nutrition', 'አመጋገብ', '10 min', false, false, TGradients.gradGreen),
-    _Mod('anc_visits', 'ANC Visits Explained', 'ANC ጉብኝቶች ማብራሪያ', 'Pregnancy', 'እርግዝና', '15 min', false, false, TGradients.gradBlue),
-    _Mod('postpartum', 'Postpartum Recovery', 'ድህረ-ወሊድ ማገገም', 'Postpartum', 'ድህረ-ወሊድ', '10 min', false, true, TGradients.gradPink),
-    _Mod('mental_health', 'Mental Health in Pregnancy', 'በእርግዝና የአዕምሮ ጤና', 'Wellness', 'ጤናማነት', '8 min', false, true, TGradients.gradGold),
-    _Mod('lab_literacy', 'Reading Lab Results', 'የላብ ውጤቶችን ማንበብ', 'Clinical', 'ክሊኒካዊ', '12 min', false, true, TGradients.gradBlue),
-    _Mod('breastfeeding', 'Breastfeeding Guide', 'የጡት ማጥባት መመሪያ', 'Postpartum', 'ድህረ-ወሊድ', '10 min', false, true, TGradients.gradGreen),
+    EducationModule(
+      id: 'cycle_basics',
+      titleEn: 'Understanding Your Cycle',
+      titleAm: 'ዑደቱን መረዳት',
+      categoryEn: 'Reproductive',
+      categoryAm: 'የማዋለድ',
+      duration: '8 min',
+      completed: true,
+      locked: false,
+      gradient: TGradients.gradPink,
+      icon: Icons.water_drop_rounded,
+      contentEn: 'Learn about your menstrual cycle phases and what to expect.',
+      contentAm: 'የወር አበባ ዑደትዎን ደረጃዎች እና ምን እንደሚጠብቁ ይወቁ።',
+    ),
+    EducationModule(
+      id: 'danger_signs',
+      titleEn: 'Danger Signs in Pregnancy',
+      titleAm: 'በእርግዝና አደጋ ምልክቶች',
+      categoryEn: 'Pregnancy',
+      categoryAm: 'እርግዝና',
+      duration: '12 min',
+      completed: true,
+      locked: false,
+      gradient: TGradients.gradTeal,
+      icon: Icons.warning_rounded,
+      contentEn: 'Recognize warning signs that require immediate medical attention.',
+      contentAm: 'አፋጣኝ የህክምና እርዳታ የሚፈልጉ የማስጠንቀቂያ ምልክቶችን ይለዩ።',
+    ),
+    EducationModule(
+      id: 'iron_nutrition',
+      titleEn: 'Iron & Nutrition Guide',
+      titleAm: 'ብረት እና አመጋገብ መመሪያ',
+      categoryEn: 'Nutrition',
+      categoryAm: 'አመጋገብ',
+      duration: '10 min',
+      completed: false,
+      locked: false,
+      gradient: TGradients.gradGreen,
+      icon: Icons.restaurant_rounded,
+      contentEn: 'How to maintain healthy iron levels through diet and supplements.',
+      contentAm: 'በአመጋገብ እና በተጨማሪዎች ጤናማ የብረት መጠንን እንዴት መጠበቅ እንደሚቻል።',
+    ),
+    EducationModule(
+      id: 'anc_visits',
+      titleEn: 'ANC Visits Explained',
+      titleAm: 'ANC ጉብኝቶች ማብራሪያ',
+      categoryEn: 'Pregnancy',
+      categoryAm: 'እርግዝና',
+      duration: '15 min',
+      completed: false,
+      locked: false,
+      gradient: TGradients.gradBlue,
+      icon: Icons.local_hospital_rounded,
+      contentEn: 'What to expect at each antenatal care visit and why they matter.',
+      contentAm: 'በእያንዳንዱ የቅድመ ወሊድ ክትትል ጉብኝት ምን እንደሚደረግ እና ለምን አስፈላጊ እንደሆነ።',
+    ),
+    EducationModule(
+      id: 'postpartum',
+      titleEn: 'Postpartum Recovery',
+      titleAm: 'ድህረ-ወሊድ ማገገም',
+      categoryEn: 'Postpartum',
+      categoryAm: 'ድህረ-ወሊድ',
+      duration: '10 min',
+      completed: false,
+      locked: true,
+      gradient: TGradients.gradPink,
+      icon: Icons.baby_changing_station_rounded,
+      contentEn: 'Caring for yourself after childbirth and recognizing postpartum warning signs.',
+      contentAm: 'ከወሊድ በኋላ እራስዎን መንከባከብ እና የድህረ-ወሊድ የማስጠንቀቂያ ምልክቶችን ማወቅ።',
+    ),
+    EducationModule(
+      id: 'mental_health',
+      titleEn: 'Mental Health in Pregnancy',
+      titleAm: 'በእርግዝና የአዕምሮ ጤና',
+      categoryEn: 'Wellness',
+      categoryAm: 'ጤናማነት',
+      duration: '8 min',
+      completed: false,
+      locked: true,
+      gradient: TGradients.gradGold,
+      icon: Icons.psychology_rounded,
+      contentEn: 'Understanding emotional changes and when to seek support.',
+      contentAm: 'የስሜት ለውጦችን መረዳት እና መቼ ድጋፍ መጠየቅ እንዳለበት።',
+    ),
+    EducationModule(
+      id: 'lab_literacy',
+      titleEn: 'Reading Lab Results',
+      titleAm: 'የላብ ውጤቶችን ማንበብ',
+      categoryEn: 'Clinical',
+      categoryAm: 'ክሊኒካዊ',
+      duration: '12 min',
+      completed: false,
+      locked: true,
+      gradient: TGradients.gradBlue,
+      icon: Icons.biotech_rounded,
+      contentEn: 'How to interpret common blood test values during pregnancy.',
+      contentAm: 'በእርግዝና ወቅት የተለመዱ የደም ምርመራ ውጤቶችን እንዴት መተርጎም እንደሚቻል።',
+    ),
+    EducationModule(
+      id: 'breastfeeding',
+      titleEn: 'Breastfeeding Guide',
+      titleAm: 'የጡት ማጥባት መመሪያ',
+      categoryEn: 'Postpartum',
+      categoryAm: 'ድህረ-ወሊድ',
+      duration: '10 min',
+      completed: false,
+      locked: true,
+      gradient: TGradients.gradGreen,
+      icon: Icons.emoji_food_beverage_rounded,
+      contentEn: 'Benefits of breastfeeding and practical tips for success.',
+      contentAm: 'የጡት ማጥባት ጥቅሞች እና ለስኬት ተግባራዊ ምክሮች።',
+    ),
   ];
 
   @override
@@ -35,7 +141,7 @@ class _EducationScreenState extends State<EducationScreen> {
     final lang = context.watch<LanguageProvider>();
     final cats = ['All', 'Pregnancy', 'Nutrition', 'Wellness', 'Clinical', 'Postpartum'];
     final filtered = _filter == 'All' ? _modules
-        : _modules.where((m) => m.category == _filter).toList();
+        : _modules.where((m) => m.categoryEn == _filter).toList();
     final badges = [
       ('First Step', 'የመጀመሪያ እርምጃ', Icons.star_rounded, 1, TGradients.gradTeal),
       ('Health Aware', 'ጤና ንቁ', Icons.favorite_rounded, 3, TGradients.gradPink),
@@ -52,7 +158,6 @@ class _EducationScreenState extends State<EducationScreen> {
           sliver: SliverList(delegate: SliverChildListDelegate([
             Text(lang.learningHub, style: TTextStyles.headlineLarge),
             const SizedBox(height: 20),
-            // Progress card
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -81,7 +186,6 @@ class _EducationScreenState extends State<EducationScreen> {
               ]),
             ),
             const SizedBox(height: 20),
-            // Badges row
             Row(children: badges.map((b) {
               final unlocked = _completed >= b.$4;
               return Expanded(child: Container(
@@ -103,7 +207,6 @@ class _EducationScreenState extends State<EducationScreen> {
               ));
             }).toList()),
             const SizedBox(height: 20),
-            // Category filter
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(children: cats.map((c) => GestureDetector(
@@ -124,15 +227,20 @@ class _EducationScreenState extends State<EducationScreen> {
               )).toList()),
             ),
             const SizedBox(height: 16),
-            // Modules
-            ...filtered.map((m) => _ModCard(
-              mod: m,
-              onComplete: () => setState(() {
-                if (!m.completed) {
-                  m.completed = true;
-                  _completed++;
-                }
-              }),
+            ...filtered.map((module) => GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => ModuleScreen(module: module)));
+              },
+              child: _ModCard(
+                module: module,
+                onComplete: () => setState(() {
+                  if (!module.completed) {
+                    module.completed = true;
+                    _completed++;
+                  }
+                }),
+              ),
             )),
             const SizedBox(height: 80),
           ])),
@@ -142,23 +250,15 @@ class _EducationScreenState extends State<EducationScreen> {
   }
 }
 
-class _Mod {
-  final String id, titleEn, titleAm, category, categoryAm, duration;
-  bool completed;
-  final bool locked;
-  final LinearGradient gradient;
-  _Mod(this.id, this.titleEn, this.titleAm, this.category, this.categoryAm,
-      this.duration, this.completed, this.locked, this.gradient);
-}
-
 class _ModCard extends StatelessWidget {
-  final _Mod mod;
+  final EducationModule module;
   final VoidCallback onComplete;
-  const _ModCard({required this.mod, required this.onComplete});
+  const _ModCard({required this.module, required this.onComplete});
 
   @override
   Widget build(BuildContext context) {
     final lang = context.watch<LanguageProvider>();
+    final mod = module; // alias for readability
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
@@ -190,7 +290,7 @@ class _ModCard extends StatelessWidget {
                   color: TColors.teal50,
                   borderRadius: BorderRadius.circular(8)),
                 child: Text(
-                  lang.isAmharic ? mod.categoryAm : mod.category,
+                  lang.isAmharic ? mod.categoryAm : mod.categoryEn,
                   style: const TextStyle(fontSize: 10, color: TColors.teal700))),
               if (mod.completed) ...[
                 const SizedBox(width: 6),
