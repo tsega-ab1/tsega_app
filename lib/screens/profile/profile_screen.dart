@@ -1,3 +1,4 @@
+import '../rewards/rewards_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/theme/colors.dart';
@@ -70,6 +71,12 @@ class ProfileScreen extends StatelessWidget {
             ])),
             const SizedBox(height: 24),
 
+// Button/tap to add:
+GestureDetector(
+  onTap: () => Navigator.push(context,
+    MaterialPageRoute(builder: (_) => const RewardsScreen())),
+  child: // your rewards card or drawer item
+)
             // Streak card
             Container(
               padding: const EdgeInsets.all(20),
