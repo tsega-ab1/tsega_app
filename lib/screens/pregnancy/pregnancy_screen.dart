@@ -19,16 +19,17 @@ class PregnancyScreen extends StatelessWidget {
     final stage = context.watch<StageProvider>();
     final week = stage.pregnancyWeek.clamp(1, 40);
 
-    // Find closest baby size
     final sizeKey = AppConstants.babySizes.keys
         .lastWhere((k) => k <= week, orElse: () => 4);
     final babySize = AppConstants.babySizes[sizeKey] ?? 'a poppy seed';
+
+    // Weeks for the Weekly Guide chips (every 4 weeks)
+    final weekChips = [for (int i = 4; i <= 40; i += 4) i];
 
     return Scaffold(
       backgroundColor: TColors.cream,
       body: CustomScrollView(
         slivers: [
-          // Header
           SliverToBoxAdapter(
             child: Container(
               decoration: const BoxDecoration(gradient: TGradients.gradTeal),
@@ -47,7 +48,6 @@ class PregnancyScreen extends StatelessWidget {
                           fontSize: 26, fontWeight: FontWeight.w700,
                           color: TColors.white)),
                   const SizedBox(height: 28),
-                  // Week + due date row
                   Row(children: [
                     _WeekBubble(week: week, lang: lang),
                     const SizedBox(width: 20),
@@ -86,7 +86,6 @@ class PregnancyScreen extends StatelessWidget {
                     )),
                   ]),
                   const SizedBox(height: 20),
-                  // Baby size banner
                   Container(
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
@@ -112,7 +111,6 @@ class PregnancyScreen extends StatelessWidget {
             ),
           ),
 
-          // Quick actions
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(20),
@@ -154,12 +152,66 @@ class PregnancyScreen extends StatelessWidget {
                       ),
                     ),
                   ]),
+                  const SizedBox(height: 28),
+
+                  // ─── WEEKLY GUIDE ─────────────────────────────
+                  Text(lang.s('Weekly Guide', 'ሳምንታዊ መመሪያ'),
+                      style: TTextStyles.headlineSmall),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    height: 72,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: weekChips.length,
+                      separatorBuilder: (_, __) => const SizedBox(width: 12),
+                      itemBuilder: (_, i) {
+                        final w = weekChips[i];
+                        final isCurrent = (week >= w - 3 && week <= w);
+                        return GestureDetector(
+                          onTap: () => Navigator.push(context,
+                              MaterialPageRoute(
+                                  builder: (_) => WeekByWeekScreen(week: w))),
+                          child: Container(
+                            width: 64,
+                            decoration: BoxDecoration(
+                              color: isCurrent ? TColors.teal500 : TColors.white,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(
+                                  color: isCurrent ? Colors.transparent : TColors.teal300),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: TColors.teal700.withOpacity(0.06),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('$w',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700,
+                                      color: isCurrent ? TColors.white : TColors.teal500,
+                                    )),
+                                Text(lang.s('wk', 'ሳም'),
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: isCurrent ? TColors.white.withOpacity(0.8) : TColors.gray,
+                                    )),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
 
-          // ANC Reminders
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -167,7 +219,6 @@ class PregnancyScreen extends StatelessWidget {
             ),
           ),
 
-          // Danger Signs
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(20),
