@@ -61,11 +61,11 @@ class _HealthScreenState extends State<HealthScreen>
                 const SizedBox(height: 16),
                 _RiskSummaryCard(latest: _results.first),
                 const SizedBox(height: 16),
-                    const SizedBox(height: 16),
+                    
                 GestureDetector(
   onTap: () => Navigator.push(context,
     MaterialPageRoute(builder: (_) => const WearablesScreen())),
-  child: // your wearables card
+  child:
 )
                 const SizedBox(height: 16),
                 if (stage.isPregnancyMode) ...[
