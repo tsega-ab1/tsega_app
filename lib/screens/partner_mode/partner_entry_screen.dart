@@ -441,7 +441,7 @@ class _PartnerLinkSuccessScreenState extends State<PartnerLinkSuccessScreen>
                             fontSize: 14, color: TColors.white)),
                       ]),
                     ),
-                  )),
+                  )).toList(),
                 ]),
               ),
               const Spacer(),

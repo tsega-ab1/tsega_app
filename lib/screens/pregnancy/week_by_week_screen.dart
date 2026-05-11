@@ -6,7 +6,8 @@ import '../../core/providers/language_provider.dart';
 import '../../core/providers/stage_provider.dart';
 
 class WeekByWeekScreen extends StatelessWidget {
-  const WeekByWeekScreen({super.key});
+  final int currentWeek;
+  const WeekByWeekScreen({super.key, this.currentWeek = 1});
 
   static const _dataEn = {
     4:  ('The Embryo', 'Your baby is the size of a poppy seed. The neural tube — brain and spinal cord — is forming.'),

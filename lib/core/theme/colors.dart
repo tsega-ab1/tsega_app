@@ -48,4 +48,11 @@ class TColors {
   static const cream  = Color(0xFFF8F8FF);
   static const white  = Color(0xFFFFFFFF);
   static const black  = Color(0xFF000000);
+
+  // Added variants needed by new screens
+  static const teal400  = Color(0xFF26B0B0);
+  static const pink400  = Color(0xFFEC407A);
+  static const pink600  = Color(0xFFC2185B);
+  static const blue400  = Color(0xFF42A5F5);
+  static const green600 = Color(0xFF43A047);
 }

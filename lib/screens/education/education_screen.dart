@@ -236,7 +236,7 @@ class _EducationScreenState extends State<EducationScreen> {
                 module: module,
                 onComplete: () => setState(() {
                   if (!module.completed) {
-                    module.completed = true;
+                    // module completed — use provider to update state
                     _completed++;
                   }
                 }),
